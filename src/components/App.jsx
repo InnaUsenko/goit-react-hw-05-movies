@@ -17,9 +17,6 @@ export const App = () => {
         <Link to={`${APP_PATH}/movies`} style={{ marginRight: 24 }}>
           Movies
         </Link>
-        <Link to={`${APP_PATH}/movies/1`} style={{ marginRight: 24 }}>
-          MovieDetails
-        </Link>
       </nav>
       <Routes>
         <Route path={`${APP_PATH}/`} element={<Home />} />

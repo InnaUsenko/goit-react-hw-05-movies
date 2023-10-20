@@ -16,3 +16,20 @@ export async function getTrending() {
     console.log('FETCH ERROR: ' + err);
   }
 }
+
+export async function getMovies(searchQuery, page) {
+  try {
+    const response = await axios.get(URL + '/search/movie', {
+      params: {
+        api_key: API_KEY,
+        query: searchQuery,
+        page: page,
+        language: 'en-US',
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    console.log('FETCH ERROR: ' + err);
+  }
+}

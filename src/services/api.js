@@ -33,3 +33,18 @@ export async function getMovies(searchQuery, page) {
     console.log('FETCH ERROR: ' + err);
   }
 }
+
+export async function getDetails(movie_id) {
+  try {
+    const response = await axios.get(URL + '/movie/' + movie_id, {
+      params: {
+        api_key: API_KEY,
+        language: 'en-US',
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    console.log('FETCH ERROR: ' + err);
+  }
+}

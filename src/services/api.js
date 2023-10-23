@@ -48,3 +48,33 @@ export async function getDetails(movie_id) {
     console.log('FETCH ERROR: ' + err);
   }
 }
+
+export async function getCast(movie_id) {
+  try {
+    const response = await axios.get(URL + '/movie/' + movie_id + '/credits', {
+      params: {
+        api_key: API_KEY,
+        language: 'en-US',
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    console.log('FETCH ERROR: ' + err);
+  }
+}
+
+export async function getReviews(movie_id) {
+  try {
+    const response = await axios.get(URL + '/movie/' + movie_id + '/reviews', {
+      params: {
+        api_key: API_KEY,
+        language: 'en-US',
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    console.log('FETCH ERROR: ' + err);
+  }
+}

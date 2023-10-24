@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { getReviews } from '../../services/api';
 import { useState, useEffect } from 'react';
 
-export const Reviews = props => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [theReview, setTheReview] = useState([]);
 
@@ -18,7 +18,6 @@ export const Reviews = props => {
 
   return (
     <div>
-      <h2>Reviews {movieId} is here</h2>
       {theReview.length > 0 && (
         <ul>
           {theReview.map(el => {
@@ -35,3 +34,5 @@ export const Reviews = props => {
     </div>
   );
 };
+
+export default Reviews;

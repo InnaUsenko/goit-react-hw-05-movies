@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getMovies } from '../../services/api';
 import { Loader } from '../Loader/Loader';
 
-export const Movies = () => {
+const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [goit, setGoit] = useState(false);
@@ -58,3 +58,5 @@ export const Movies = () => {
     </div>
   );
 };
+
+export default Movies;

@@ -26,7 +26,7 @@ const Movies = () => {
       getMovies(searchQuery, 1)
         .then(data => {
           setSearchResults(data.results);
-          window.history.replaceState(null, '', `/movies?query=${searchQuery}`);
+          window.history.replaceState(null, '', `movies?query=${searchQuery}`);
         })
         .catch(err => {
           setError(err);
@@ -42,7 +42,7 @@ const Movies = () => {
   return (
     <div>
       <h1>Search Movies</h1>
-      <form onSubmit={hendleSubmit}>
+      <form onSubmit={hendleSubmit} method="GET">
         <input
           type="text"
           placeholder="type somethin for searching..."

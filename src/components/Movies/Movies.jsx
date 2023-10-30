@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { getMovies } from '../../services/api';
 import { Loader } from '../Loader/Loader';
 
@@ -10,9 +10,13 @@ const Movies = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const hendleSubmit = event => {
     event.preventDefault();
+    if (searchQuery) {
+      setSearchParams({ query: searchQuery });
+    }
     setGoit(true);
   };
 
@@ -22,12 +26,11 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    if (searchQuery && searchQuery.length > 0 && goit) {
+    if (searchParams.get('query')) {
       setIsLoading(true);
-      getMovies(searchQuery, 1)
+      getMovies(searchParams.get('query'), 1)
         .then(data => {
           setSearchResults(data.results);
-          window.history.replaceState(null, '', `movies?query=${searchQuery}`);
         })
         .catch(err => {
           setError(err);
@@ -38,6 +41,25 @@ const Movies = () => {
           setSearchQuery('');
         });
     }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (searchQuery && searchQuery.length > 0 && goit) {
+      setIsLoading(true);
+      getMovies(searchQuery, 1)
+        .then(data => {
+          setSearchResults(data.results);
+        })
+        .catch(err => {
+          setError(err);
+        })
+        .finally(() => {
+          setGoit(false);
+          setIsLoading(false);
+          setSearchQuery('');
+        });
+    }
+    console.log('SEARCH BTN');
   }, [goit, searchQuery]);
 
   return (
